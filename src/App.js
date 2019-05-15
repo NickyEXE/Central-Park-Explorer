@@ -8,7 +8,7 @@ function App() {
   return (
     <div>
     <Switch>
-      <Route path='/location/:id' render={(routeProps) => <Location {...routeProps} />} />
+      <Route path='/locations/:id' render={(routeProps) => <Location {...routeProps} />} />
     </Switch>
     </div>
   );
