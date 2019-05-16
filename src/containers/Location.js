@@ -4,7 +4,7 @@ import GoogleMapsRender from '../components/GoogleMapsRender.js'
 // import Title from '../components/Title.js'
 import Tags from '../components/Tags.js'
 
-const URL = "http://localhost:3001/"
+const URL = "https://b6069cf8.ngrok.io/"
 
 class Location extends Component {
 
