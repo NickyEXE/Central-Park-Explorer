@@ -1,23 +1,39 @@
 import React, { Component } from 'react'
+import ControlledCarousel from '../components/ControlledCarousel.js'
+import Title from '../components/Title.js'
 
 const URL = "http://localhost:3001/"
 
 class Location extends Component {
 
   state = {
-    location: {}
+    facts: [],
+    id: parseInt(this.props.match.params.id),
+    landmarks: [],
+    locimages: [],
+    tags: [],
+    name: null,
+    description: null
+  }
+
+  style = {
+    backgroundColor: 'white',
+    color: 'black'
   }
 
   componentDidMount(){
     fetch(URL+"locations/"+this.props.match.params.id)
     .then(response => response.json())
-    .then(response => this.setState({location: response}))
+    .then(response => this.setState({...response}))
   }
 
-  render()
-  {
-    console.log(this.state)
-    return "dogs"
+  render(){
+    return (
+      <div style={this.style}>
+      <Title name={this.state.name}/>
+      <ControlledCarousel name={this.state.name} images={this.state.locimages} key="Carousel"/>)
+      </div>
+    )
   }
 
 
