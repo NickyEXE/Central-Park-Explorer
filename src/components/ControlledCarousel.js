@@ -14,6 +14,8 @@ class ControlledCarousel extends Component {
     };
   }
 
+  uuid = require('uuidv4');
+
   handleSelect(selectedIndex, e) {
     this.setState({
       index: selectedIndex,
@@ -37,7 +39,7 @@ class ControlledCarousel extends Component {
         >
         {this.props.images.map(image => {
           return(
-          <Carousel.Item>
+          <Carousel.Item key={this.uuid()}>
             <img
               className="d-block w-100"
               src={image.url}

@@ -37,7 +37,7 @@ class Location extends Component {
     return (
       <div style={this.style}>
       <ControlledCarousel name={this.state.name} images={this.state.locimages} key="Carousel"/>
-      <center style={this.altStyle}><Tags tags={this.state.tags}/></center>
+      <center style={this.altStyle}>Recommended for:<br/> <Tags tags={this.state.tags}/></center><br/>
       {this.props.latitude && (<GoogleMapsRender lat={this.props.latitude} long={this.props.longitude} />)}
       </div>
     )
