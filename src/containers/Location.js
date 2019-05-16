@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import LocationCarousel from '../components/LocationCarousel.js'
 import LandmarkCarousel from '../components/LandmarkCarousel.js'
+import LandmarkModal from '../components/LandmarkModal.js'
 import GoogleMapsRender from '../components/GoogleMapsRender.js'
 // import Title from '../components/Title.js'
 import Tags from '../components/Tags.js'
@@ -16,7 +17,8 @@ class Location extends Component {
     locimages: [],
     tags: [],
     name: null,
-    description: null
+    description: null,
+    modalData: false
   }
 
   style = {
@@ -38,7 +40,14 @@ class Location extends Component {
     .then(response => this.setState({...response}))
   }
 
+  modalClose = () => this.setState({ modalData: false });
+
+  modalOpen = (landmarkId) => this.setState({modalData: this.state.landmarks.find(landmark => landmark.id === landmarkId)})
+
+
+
   render(){
+    console.log(this.state)
     return (
       <div style={this.style}>
       <LocationCarousel name={this.state.name} images={this.state.locimages} key="Carousel"/>
@@ -46,7 +55,11 @@ class Location extends Component {
       {this.props.latitude && (<GoogleMapsRender lat={this.props.latitude} long={this.props.longitude} />)}
       <br />
       <div style={this.tagStyle}>LANDMARKS TO SEE:</div>
-      <LandmarkCarousel landmarks={this.state.landmarks}/>
+      <LandmarkCarousel modalOpen={this.modalOpen} landmarks={this.state.landmarks}/>
+      <LandmarkModal
+        modalData={this.state.modalData}
+        onHide={this.modalClose}
+      />
       </div>
     )
   }

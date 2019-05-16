@@ -38,9 +38,8 @@ class LandmarkCarousel extends Component {
           onSelect={this.handleSelect}
         >
         {this.props.landmarks.map(landmark => {
-          console.log(landmark)
           return(
-          <Carousel.Item key={this.uuid()}>
+          <Carousel.Item onClick={() => this.props.modalOpen(landmark.id)} key={this.uuid()}>
             <img
               className="d-block w-100"
               src={landmark.image}
