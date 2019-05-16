@@ -9,9 +9,7 @@ class App extends Component {
 
   state = {
     latitude: null,
-    longitude: null,
-    timestamp: null,
-    currentuser: null
+    longitude: null
   }
 
   getLocationData =(position) => {
@@ -19,12 +17,12 @@ class App extends Component {
   }
 
   render(){
-    console.log(this.state)
+
     return (
       <div>
       <LocationRequester getLocationData={this.getLocationData} />
       <Switch>
-        <Route path='/locations/:id' render={(routeProps) => <Location {...routeProps} />} />
+        <Route path='/locations/:id' render={(routeProps) => <Location {...routeProps} {...this.state} />} />
       </Switch>
       </div>
     );}

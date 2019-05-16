@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ControlledCarousel from '../components/ControlledCarousel.js'
+import GoogleMapsRender from '../components/GoogleMapsRender.js'
 // import Title from '../components/Title.js'
 import Tags from '../components/Tags.js'
 
@@ -37,6 +38,7 @@ class Location extends Component {
       <div style={this.style}>
       <ControlledCarousel name={this.state.name} images={this.state.locimages} key="Carousel"/>
       <center style={this.altStyle}><Tags tags={this.state.tags}/></center>
+      {this.props.latitude && (<GoogleMapsRender lat={this.props.latitude} long={this.props.longitude} />)}
       </div>
     )
   }
