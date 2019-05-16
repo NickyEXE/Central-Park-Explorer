@@ -17,7 +17,6 @@ class App extends Component {
   }
 
   render(){
-
     return (
       <div>
       <LocationRequester getLocationData={this.getLocationData} />

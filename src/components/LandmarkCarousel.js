@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import Carousel from 'react-bootstrap/Carousel'
 import Spinner from 'react-bootstrap/Spinner'
 
-class ControlledCarousel extends Component {
+class LandmarkCarousel extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -30,25 +30,26 @@ class ControlledCarousel extends Component {
     objectPosition: 'center',
     width: '100%',
     height: '250px'}
-    if (this.props.images.length > 0) {
+    if (this.props.landmarks.length > 0) {
       return (
         <Carousel
           activeIndex={index}
           direction={direction}
           onSelect={this.handleSelect}
         >
-        {this.props.images.map(image => {
+        {this.props.landmarks.map(landmark => {
+          console.log(landmark)
           return(
           <Carousel.Item key={this.uuid()}>
             <img
               className="d-block w-100"
-              src={image.url}
-              alt={image.alt}
+              src={landmark.image}
+              alt={landmark.name}
             style=
               {imageStyle}
             />
             <Carousel.Caption>
-            <h3>Welcome to {this.props.name}</h3>
+            <h3>{landmark.name}</h3>
             </Carousel.Caption>
           </Carousel.Item>
         )})}
@@ -62,4 +63,4 @@ class ControlledCarousel extends Component {
 }
 
 
-export default ControlledCarousel
+export default LandmarkCarousel

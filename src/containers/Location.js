@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import ControlledCarousel from '../components/ControlledCarousel.js'
+import LocationCarousel from '../components/LocationCarousel.js'
+import LandmarkCarousel from '../components/LandmarkCarousel.js'
 import GoogleMapsRender from '../components/GoogleMapsRender.js'
 // import Title from '../components/Title.js'
 import Tags from '../components/Tags.js'
@@ -19,12 +20,16 @@ class Location extends Component {
   }
 
   style = {
-    backgroundColor: 'white',
-    color: 'black'
-  }
-  altStyle = {
-    backgroundColor: '#379683',
+    backgroundColor: '#1d1e22',
     color: 'white'
+  }
+  tagStyle = {
+    backgroundColor: '#379683',
+    color: 'white',
+    paddingTop: '8px',
+    paddingBottom: '8px',
+    textAlign: 'center',
+    align: 'center'
   }
 
   componentDidMount(){
@@ -36,14 +41,15 @@ class Location extends Component {
   render(){
     return (
       <div style={this.style}>
-      <ControlledCarousel name={this.state.name} images={this.state.locimages} key="Carousel"/>
-      <center style={this.altStyle}>Recommended for:<br/> <Tags tags={this.state.tags}/></center><br/>
+      <LocationCarousel name={this.state.name} images={this.state.locimages} key="Carousel"/>
+      <center style={this.tagStyle}>RECOMMENDED FOR:<br/> <Tags tags={this.state.tags}/></center><br/>
       {this.props.latitude && (<GoogleMapsRender lat={this.props.latitude} long={this.props.longitude} />)}
+      <br />
+      <div style={this.tagStyle}>LANDMARKS TO SEE:</div>
+      <LandmarkCarousel landmarks={this.state.landmarks}/>
       </div>
     )
   }
-
-
 }
 
 
