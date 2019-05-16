@@ -46,6 +46,9 @@ class ControlledCarousel extends Component {
             style=
               {imageStyle}
             />
+            <Carousel.Caption>
+            <h3>Welcome to {this.props.name}</h3>
+            </Carousel.Caption>
           </Carousel.Item>
         )})}
         </Carousel>

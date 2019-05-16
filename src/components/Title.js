@@ -4,7 +4,8 @@ function Title(props) {
 
 
   if (props.name) {
-  return <center><h4>Welcome to {props.name}</h4></center>
+  // return <center><h4>Welcome to {props.name}</h4></center>
+  return ""
   }
   else {
     return ""
