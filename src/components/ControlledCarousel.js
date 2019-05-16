@@ -27,8 +27,7 @@ class ControlledCarousel extends Component {
     {
     objectPosition: 'center',
     width: '100%',
-    height: '350px',
-    marginBottom: '1rem'}
+    height: '250px'}
     if (this.props.images.length > 0) {
       return (
         <Carousel
