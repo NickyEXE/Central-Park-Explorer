@@ -22,6 +22,8 @@ class App extends Component {
   setCurrentUser = (user) => {
     this.setState({
       currentuser: user
+    }, () => {
+      this.props.history.push('/locations/1')
     })
   }
 
