@@ -44,7 +44,7 @@ class App extends Component {
 	}
 
   setCurrentUser = (response) => {
-    console.log("response", response)
+    localStorage.removeItem("token")
     this.setState({
       currentuser: response.user
     }, () => {
