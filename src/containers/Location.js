@@ -35,7 +35,12 @@ class Location extends Component {
   }
 
   componentDidMount(){
-    fetch(URL+"locations/"+this.props.match.params.id)
+    fetch(URL+"locations/"+this.props.match.params.id, {
+      method: 'GET',
+      headers: {
+        "Authorization": localStorage.getItem("token")
+      }
+    })
     .then(response => response.json())
     .then(response => this.setState({...response}))
   }

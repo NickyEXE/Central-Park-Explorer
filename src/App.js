@@ -19,10 +19,37 @@ class App extends Component {
     longitude: null
   }
 
-  setCurrentUser = (user) => {
+
+  componentDidMount(){
+		const token = localStorage.getItem("token")
+		if (token){
+      console.log("Got a token, fam")
+			// load up their shit
+			// fetch("http://localhost:3001/auto_login", {
+			// 	headers: {
+			// 		"Authorization": token
+			// 	}
+			// })
+			// .then(res => res.json())
+			// .then((response) => {
+			// 	if (response.errors) {
+			// 		alert(response.errors)
+			// 	} else {
+			// 		this.setState({
+			// 			currentUser: response
+			// 		})
+			// 	}
+			// })
+		}
+	}
+
+  setCurrentUser = (response) => {
+    console.log("response", response)
     this.setState({
-      currentuser: user
+      currentuser: response.user
     }, () => {
+      // to be replaced with "wherever they are"
+      localStorage.setItem("token", response.jwt)
       this.props.history.push('/locations/1')
     })
   }
