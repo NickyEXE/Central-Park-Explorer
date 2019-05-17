@@ -13,34 +13,28 @@ class App extends Component {
 
 
   state = {
+    currentuser: null,
     latitude: null,
     longitude: null
+  }
+
+  setCurrentUser = (user) => {
+    this.setState({
+      currentuser: user
+    })
   }
 
   getLocationData =(position) => {
     this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude})
   }
 
-  onCreateUserSubmit = (state) => {
-    console.log(state)
-    fetch(URL+"users/create",{
-      method: 'POST', // or 'PUT'
-      body: JSON.stringify(state), // data can be `string` or {object}!
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(res => res.json())
-    .then(console.log)
-  }
-
-
   render(){
+    console.log(this.state)
     return (
       <div>
       <LocationRequester getLocationData={this.getLocationData} />
       <Switch>
-        <Route path='/users/create' render={(routeProps) => <CreateUser {...routeProps} onSubmit={this.onCreateUserSubmit} /> } />
+        <Route path='/users/create' render={(routeProps) => <CreateUser {...routeProps} setCurrentUser={this.setCurrentUser} /> } />
         <Route path='/locations/:id' render={(routeProps) => <Location {...routeProps} {...this.state} />} />
       </Switch>
       </div>
