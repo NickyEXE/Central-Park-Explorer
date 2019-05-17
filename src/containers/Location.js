@@ -47,7 +47,6 @@ class Location extends Component {
 
 
   render(){
-    console.log(this.state)
     return (
       <div style={this.style}>
       <LocationCarousel name={this.state.name} images={this.state.locimages} key="Carousel"/>
