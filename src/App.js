@@ -4,6 +4,7 @@ import Location from './containers/Location.js'
 import LocationRequester from './components/LocationRequester.js'
 import CreateUser from './components/CreateUser.js'
 import Login from './components/Login.js'
+import Navigator from './components/Navigator.js'
 import logo from './logo.svg';
 import './App.css';
 
@@ -54,15 +55,25 @@ class App extends Component {
     })
   }
 
+  logout = () => {
+    localStorage.removeItem("token")
+    this.setState(
+      {
+        currentuser: null
+      }
+    )
+    this.props.history.push('/login')
+  }
+
   getLocationData =(position) => {
     this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude})
   }
 
   render(){
-    console.log(this.state)
     return (
       <div>
       <LocationRequester getLocationData={this.getLocationData} />
+      <Navigator currentuser={this.state.currentuser} logout={this.logout} />
       <Switch>
         <Route path='/login' render={(routeProps) => <Login {...routeProps} setCurrentUser={this.setCurrentUser} />}/>
         <Route path='/users/create' render={(routeProps) => <CreateUser {...routeProps} setCurrentUser={this.setCurrentUser} /> } />
