@@ -14,7 +14,8 @@ class Login extends Component {
     this.setState({[e.target.name]: e.target.value})
   }
 
-  onSubmit = () => {
+  onSubmit = (e) => {
+    e.preventDefault()
     fetch(URL+"login",{
       method: 'POST', // or 'PUT'
       body: JSON.stringify(this.state), // data can be `string` or {object}!
@@ -50,11 +51,12 @@ class Login extends Component {
         <Form.Group controlId="formGroupPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" name="password" value={this.state.password} onChange={this.onChange} placeholder="Password" />
+          <Button variant="primary" type="submit" onClick={this.onSubmit}>
+            Submit
+          </Button>
         </Form.Group>
-        <Button variant="primary" onClick={() => this.onSubmit(this.state)}>
-          Submit
-        </Button>
-           <br/> or <br/>
+           or <br/>
+           <br/>
         <Button variant="danger" onClick={this.onCreateUser}>
           Sign Up!
         </Button>
