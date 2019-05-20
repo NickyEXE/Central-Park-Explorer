@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+
 
 const URL = "https://b6069cf8.ngrok.io/"
 class SelectInterests extends Component {
 
   state = {
     idArray: []
+  }
+
+  componentDidMount(){
+    const token = localStorage.getItem("token")
+    fetch(URL + "interests", {
+      headers: {
+        "Authorization": token
+      }
+    })
+    .then(res => res.json())
+    .then(console.log)
   }
 
   onClick = (e) => {
@@ -26,15 +40,7 @@ class SelectInterests extends Component {
   render(){
     return(
       <Form>
-        <Form.Group controlId="formGroupUser" >
-          <Form.Label>Username</Form.Label>
-          <Form.Control type="text" name="username" value={this.state.username} onChange={this.onChange} placeholder="Enter username" />
-        </Form.Group>
-        <Form.Group controlId="formGroupPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" name="password" value={this.state.password} onChange={this.onChange} placeholder="Password" />
-        </Form.Group>
-        <Button variant="primary" onClick={() => this.onSubmit(this.state)}>
+        <Button variant="primary" onClick={this.onSubmit}>
           Submit
         </Button>
       </Form>
