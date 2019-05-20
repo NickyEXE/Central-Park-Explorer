@@ -24,24 +24,26 @@ class App extends Component {
   componentDidMount(){
 		const token = localStorage.getItem("token")
 		if (token){
-      console.log("Got a token, fam")
-			// load up their shit
-			// fetch("http://localhost:3001/auto_login", {
-			// 	headers: {
-			// 		"Authorization": token
-			// 	}
-			// })
-			// .then(res => res.json())
-			// .then((response) => {
-			// 	if (response.errors) {
-			// 		alert(response.errors)
-			// 	} else {
-			// 		this.setState({
-			// 			currentUser: response
-			// 		})
-			// 	}
-			// })
+			fetch(URL + "auto_login", {
+				headers: {
+					"Authorization": token
+				}
+			})
+			.then(res => res.json())
+			.then(response => {
+        console.log("logging in with this response", response)
+				if (response.errors) {
+					alert(response.errors, "Logout and try again")
+				} else {
+					this.setState({
+						currentuser: response
+					})
+				}
+			})
 		}
+    else {
+      if (this.props.history.location.pathname !== "/users/create")
+      return this.props.history.push('login')}
 	}
 
   setCurrentUser = (response) => {

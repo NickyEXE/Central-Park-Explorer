@@ -34,8 +34,14 @@ class Login extends Component {
     )
   }
 
+  onCreateUser = () => {
+    this.props.history.push('/users/create')
+  }
+
   render(){
     return(
+      <div>
+      <h2>Login To Explore Central Park!</h2>
       <Form>
         <Form.Group controlId="formGroupUser" >
           <Form.Label>Username</Form.Label>
@@ -48,7 +54,12 @@ class Login extends Component {
         <Button variant="primary" onClick={() => this.onSubmit(this.state)}>
           Submit
         </Button>
+           <br/> or <br/>
+        <Button variant="danger" onClick={this.onCreateUser}>
+          Sign Up!
+        </Button>
       </Form>
+      </div>
     )
   }
 

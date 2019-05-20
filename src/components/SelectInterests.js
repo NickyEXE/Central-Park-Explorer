@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button'
 
 const URL = "https://b6069cf8.ngrok.io/"
-class CreateUser extends Component {
+class SelectInterests extends Component {
 
   state = {
-    username: "",
-    password: ""
+    idArray: []
   }
 
-  onChange = (e) => {
-    this.setState({[e.target.name]: e.target.value})
+  onClick = (e) => {
+    console.log(e)
   }
 
   onSubmit = () => {
@@ -26,14 +23,8 @@ class CreateUser extends Component {
     .then(res => this.props.setCurrentUser(res))
   }
 
-  onLogin = () => {
-    this.props.history.push('/login')
-  }
-
   render(){
     return(
-      <div>
-      <h2>Sign Up To Explore Central Park!</h2>
       <Form>
         <Form.Group controlId="formGroupUser" >
           <Form.Label>Username</Form.Label>
@@ -44,17 +35,12 @@ class CreateUser extends Component {
           <Form.Control type="password" name="password" value={this.state.password} onChange={this.onChange} placeholder="Password" />
         </Form.Group>
         <Button variant="primary" onClick={() => this.onSubmit(this.state)}>
-          Create a User
-        </Button>
-         <br/> or <br/>
-        <Button variant="danger" onClick={this.onLogin}>
-          Login
+          Submit
         </Button>
       </Form>
-      </div>
     )
   }
 
 }
 
-export default CreateUser
+export default SelectInterests
