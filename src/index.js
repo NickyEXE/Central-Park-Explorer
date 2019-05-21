@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import './index.css';
 import './custom.scss';
+import BackgroundImage from './background.jpg'
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
