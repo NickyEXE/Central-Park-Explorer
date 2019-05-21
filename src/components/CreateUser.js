@@ -15,6 +15,7 @@ class CreateUser extends Component {
   }
 
   onSubmit = (e) => {
+    console.log("signing up")
     e.preventDefault()
     fetch(URL+"users/create",{
       method: 'POST', // or 'PUT'
@@ -24,7 +25,9 @@ class CreateUser extends Component {
       }
     })
     .then(res => res.json())
-    .then(res => this.props.setCurrentUser(res))
+    .then(res => {
+    this.props.setCurrentUser(res)
+    this.props.history.push('/interests')})
   }
 
   onLogin = () => {

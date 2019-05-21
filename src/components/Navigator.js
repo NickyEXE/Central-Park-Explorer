@@ -4,7 +4,6 @@ import Navbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 
 const Navigator = (props) =>  {
-  console.log("Navigator called", props)
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Navbar.Brand href="#home">Central Park Explorer</Navbar.Brand>

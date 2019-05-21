@@ -30,7 +30,9 @@ class Login extends Component {
       }
       else
       {
-        this.props.setCurrentUser(res)}
+        this.props.setCurrentUser(res)
+        this.props.history.goBack()}
+
       }
     )
   }

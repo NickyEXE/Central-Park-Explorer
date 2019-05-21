@@ -44,8 +44,8 @@ class App extends Component {
 			})
 		}
     else {
-      if (this.props.history.location.pathname !== "/users/create")
-      return this.props.history.push('login')}
+      if (this.props.history.location.pathname !== "/users/create") {
+      return this.props.history.push('/login')}}
 	}
 
   setCurrentUser = (response) => {
@@ -55,7 +55,6 @@ class App extends Component {
     }, () => {
       // to be replaced with "wherever they are"
       localStorage.setItem("token", response.jwt)
-      this.props.history.goBack()
     })
   }
 
@@ -74,6 +73,7 @@ class App extends Component {
   }
 
   render(){
+    console.log(this.state)
     return (
       <div>
       <LocationRequester getLocationData={this.getLocationData} />
