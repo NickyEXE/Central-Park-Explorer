@@ -7,7 +7,7 @@ import CreateUser from './components/CreateUser.js'
 import SelectInterests from './components/SelectInterests.js'
 import Login from './components/Login.js'
 import Navigator from './components/Navigator.js'
-import Jumbotron from 'react-bootstrap/Jumbotron'
+
 import logo from './logo.svg';
 import './App.css';
 import image from './background.jpg'
@@ -91,17 +91,18 @@ class App extends Component {
     backgroundImage: `url(${image})`
   }
 
-  jumbotron = {
-   // backgroundImage: `url(${image})`,
-   backgroundColor: 'rgba(0,0,0,.5)',
+  background = {
+   backgroundImage: `url(${image})`,
+   backgroundColor: 'rgba(0,0,0,.25)',
    backgroundSize: `cover`,
-   backgroundRepeat: `no-repeat`
+   backgroundRepeat: `no-repeat`,
+   backgroundPosition: 'center'
   }
 
   render(){
     console.log(this.state)
     return (
-      <Jumbotron style={this.jumbotron} fluid>
+      <div style={this.background}>
       <div style ={this.style}>
       <LocationRequester getLocationData={this.getLocationData} />
       <Navigator currentuser={this.state.currentuser} goToIndex={this.goToIndex} logout={this.logout} />
@@ -113,7 +114,7 @@ class App extends Component {
         <Route path='/locations' render={(routeProps) => <LocationIndex {...routeProps} setCurrentUser={this.setCurrentUser} />}/>
       </Switch>
       </div>
-      </Jumbotron>
+      </div>
     );}
 }
 
