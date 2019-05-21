@@ -69,6 +69,10 @@ class App extends Component {
     this.props.history.push('/login')
   }
 
+  goToIndex = () => {
+    this.props.history.push('/locations')
+  }
+
   getLocationData =(position) => {
     this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude})
   }
@@ -78,7 +82,7 @@ class App extends Component {
     return (
       <div>
       <LocationRequester getLocationData={this.getLocationData} />
-      <Navigator currentuser={this.state.currentuser} logout={this.logout} />
+      <Navigator currentuser={this.state.currentuser} goToIndex={this.goToIndex} logout={this.logout} />
       <Switch>
         <Route path='/login' render={(routeProps) => <Login {...routeProps} setCurrentUser={this.setCurrentUser} />}/>
         <Route path='/interests' render={(routeProps) => <SelectInterests {...routeProps} setCurrentUser={this.setCurrentUser} />}/>
