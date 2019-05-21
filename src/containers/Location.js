@@ -6,6 +6,8 @@ import GoogleMapsRender from '../components/GoogleMapsRender.js'
 // import Title from '../components/Title.js'
 import Tags from '../components/Tags.js'
 
+import TagModal from '../components/TagModal.js'
+
 const URL = "https://b6069cf8.ngrok.io/"
 
 class Location extends Component {
@@ -18,7 +20,8 @@ class Location extends Component {
     tags: [],
     name: null,
     description: null,
-    modalData: false
+    modalData: false,
+    tagModalData: false
   }
 
   style = {
@@ -49,14 +52,43 @@ class Location extends Component {
 
   modalOpen = (landmarkId) => this.setState({modalData: this.state.landmarks.find(landmark => landmark.id === landmarkId)})
 
+  addTags = () => {
+    fetch(URL+`tags/${this.state.id}`, {
+      method: 'GET',
+      headers: {
+        "Authorization": localStorage.getItem("token")
+      }
+    })
+    .then(res=>res.json())
+    .then(res => this.setState({tagModalData: res}))
+  }
 
+  tagModalClose = () => this.setState({tagModalData: false})
+  tagModalSubmit = (tag_id, review) => {
+    console.log(tag_id, review)
+    fetch(URL+`tags/${this.state.id}`,{
+      method: 'POST',
+      body: JSON.stringify({tag_id: tag_id, review: review}),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        "Authorization": localStorage.getItem("token")}
+      })
+    .then(res => res.json())
+    .then(res => {
+      if (res.errors){alert(res.errors)}
+      else {alert("Thanks for your review!");
+      this.setState({...res, tagModalData: false})}
+    })
+  }
 
   render(){
+    console.log(this.state)
     return (
       <div style={this.style}>
       <LocationCarousel name={this.state.name} images={this.state.locimages} key="Carousel"/>
       {this.state.description}
-      <center style={this.tagStyle}>RECOMMENDED FOR:<br/> <Tags tags={this.state.tags}/></center><br/>
+      <center style={this.tagStyle}>RECOMMENDED FOR:<br/> <Tags addTags={this.addTags} tags={this.state.tags}/></center><br/>
       {this.props.latitude && (<GoogleMapsRender lat={this.props.latitude} long={this.props.longitude} />)}
       <br />
       <div style={this.tagStyle}>LANDMARKS TO SEE:</div>
@@ -64,6 +96,12 @@ class Location extends Component {
       <LandmarkModal
         modalData={this.state.modalData}
         onHide={this.modalClose}
+      />
+      <TagModal
+        locationName={this.state.name}
+        modalData={this.state.tagModalData}
+        onHide={this.tagModalClose}
+        onSubmit={this.tagModalSubmit}
       />
       </div>
     )
