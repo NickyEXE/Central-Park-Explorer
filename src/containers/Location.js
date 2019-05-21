@@ -21,7 +21,8 @@ class Location extends Component {
     name: null,
     description: null,
     modalData: false,
-    tagModalData: false
+    tagModalData: false,
+    tagModalOpen: false
   }
 
   style = {
@@ -52,6 +53,7 @@ class Location extends Component {
 
   modalOpen = (landmarkId) => this.setState({modalData: this.state.landmarks.find(landmark => landmark.id === landmarkId)})
 
+
   addTags = () => {
     fetch(URL+`tags/${this.state.id}`, {
       method: 'GET',
@@ -63,7 +65,11 @@ class Location extends Component {
     .then(res => this.setState({tagModalData: res}))
   }
 
-  tagModalClose = () => this.setState({tagModalData: false})
+  openTagModal = () => {
+    this.addTags()
+    this.setState({tagModalOpen: true})
+  }
+  tagModalClose = () => this.setState({tagModalOpen: false})
   tagModalSubmit = (tag_id, review) => {
     console.log(tag_id, review)
     fetch(URL+`tags/${this.state.id}`,{
@@ -78,7 +84,8 @@ class Location extends Component {
     .then(res => {
       if (res.errors){alert(res.errors)}
       else {alert("Thanks for your review!");
-      this.setState({...res, tagModalData: false})}
+      this.setState({...res})
+      this.tagModalClose()}
     })
   }
 
@@ -88,7 +95,7 @@ class Location extends Component {
       <div style={this.style}>
       <LocationCarousel name={this.state.name} images={this.state.locimages} key="Carousel"/>
       {this.state.description}
-      <center style={this.tagStyle}>RECOMMENDED FOR:<br/> <Tags addTags={this.addTags} tags={this.state.tags}/></center><br/>
+      <center style={this.tagStyle}>RECOMMENDED FOR:<br/> <Tags openTagModal={this.openTagModal} tags={this.state.tags}/></center><br/>
       {this.props.latitude && (<GoogleMapsRender lat={this.props.latitude} long={this.props.longitude} />)}
       <br />
       <div style={this.tagStyle}>LANDMARKS TO SEE:</div>
@@ -100,6 +107,7 @@ class Location extends Component {
       <TagModal
         locationName={this.state.name}
         modalData={this.state.tagModalData}
+        tagModalOpen={this.state.tagModalOpen}
         onHide={this.tagModalClose}
         onSubmit={this.tagModalSubmit}
       />

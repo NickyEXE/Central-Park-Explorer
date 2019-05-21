@@ -8,7 +8,7 @@ function Tags(props) {
     {props.tags.map(tag => {
       return(<Badge pill variant="warning" key={uuid()}>{tag.tag}</Badge>)}
     )}
-    <Badge pill variant="dark" onClick={props.addTags} key={uuid()}>Add Recommendation</Badge>
+    <Badge pill variant="dark" onClick={props.openTagModal} key={uuid()}>Add Recommendation</Badge>
     </div>
 )}
   else {

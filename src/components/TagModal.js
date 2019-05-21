@@ -27,11 +27,10 @@ class TagModal extends React.Component {
   }
 
   render() {
-
     return (
       <Modal
         // {...this.props}
-        show={!!this.props.modalData}
+        show={!!this.props.tagModalOpen}
         onHide={this.props.onHide}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
@@ -39,7 +38,7 @@ class TagModal extends React.Component {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Ponies
+            {this.props.locationName}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
