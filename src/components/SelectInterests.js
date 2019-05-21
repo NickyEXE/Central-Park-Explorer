@@ -51,7 +51,10 @@ class SelectInterests extends Component {
       }
     })
     .then(res => res.json())
-    .then(res => this.props.setCurrentUser(res))
+    .then(res => {
+      this.props.setCurrentUser(res)
+      this.props.history.push(`/locations/`)
+    })
   }
 
   render(){

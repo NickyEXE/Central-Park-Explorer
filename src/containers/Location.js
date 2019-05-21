@@ -22,7 +22,7 @@ class Location extends Component {
   }
 
   style = {
-    backgroundColor: '#1d1e22',
+    backgroundColor: '#343a40',
     color: 'white'
   }
   tagStyle = {
@@ -55,6 +55,7 @@ class Location extends Component {
     return (
       <div style={this.style}>
       <LocationCarousel name={this.state.name} images={this.state.locimages} key="Carousel"/>
+      {this.state.description}
       <center style={this.tagStyle}>RECOMMENDED FOR:<br/> <Tags tags={this.state.tags}/></center><br/>
       {this.props.latitude && (<GoogleMapsRender lat={this.props.latitude} long={this.props.longitude} />)}
       <br />

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Location from './containers/Location.js'
+import LocationIndex from './containers/LocationIndex.js'
 import LocationRequester from './components/LocationRequester.js'
 import CreateUser from './components/CreateUser.js'
 import SelectInterests from './components/SelectInterests.js'
@@ -83,6 +84,7 @@ class App extends Component {
         <Route path='/interests' render={(routeProps) => <SelectInterests {...routeProps} setCurrentUser={this.setCurrentUser} />}/>
         <Route path='/users/create' render={(routeProps) => <CreateUser {...routeProps} setCurrentUser={this.setCurrentUser} /> } />
         <Route path='/locations/:id' render={(routeProps) => <Location {...routeProps} {...this.state} />} />
+        <Route path='/locations' render={(routeProps) => <LocationIndex {...routeProps} setCurrentUser={this.setCurrentUser} />}/>
       </Switch>
       </div>
     );}
