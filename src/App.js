@@ -88,7 +88,9 @@ class App extends Component {
     opacity: '1.0',
     justifyContent:'center',
     alignItems: 'center',
-    backgroundImage: `url(${image})`
+    color: 'white',
+    backgroundImage: `url(${image})`,
+    backgroundPosition: 'center'
   }
 
   background = {
@@ -96,7 +98,7 @@ class App extends Component {
    backgroundColor: 'rgba(0,0,0,.25)',
    backgroundSize: `cover`,
    backgroundRepeat: `no-repeat`,
-   backgroundPosition: 'center'
+   backgroundPosition: 'bottom'
   }
 
   render(){

@@ -5,7 +5,7 @@ const LocationCard = (props) => {
   return(
     <div>
     <br/>
-    <Card onClick={() => props.locationCardOnClick(props.id)} style={{ width: '18rem', marginLeft: "auto", marginRight: "auto" }}>
+    <Card onClick={() => props.locationCardOnClick(props.id)} style={{ width: '18rem', marginLeft: "auto", marginRight: "auto", backgroundColor: '#343a40' }}>
       <Card.Img variant="top" src={props.locimages[0].url} />
       <Card.Body>
         <Card.Title>{props.name}</Card.Title>

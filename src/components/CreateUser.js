@@ -36,7 +36,7 @@ class CreateUser extends Component {
 
   render(){
     return(
-      <div>
+      <div style={this.style}>
       <h2>Sign Up To Explore Central Park!</h2>
       <Form>
         <Form.Group controlId="formGroupUser" >

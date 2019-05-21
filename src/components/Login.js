@@ -43,7 +43,7 @@ class Login extends Component {
 
   render(){
     return(
-      <div>
+      <div style={this.style}>
       <h2>Login To Explore Central Park!</h2>
       <Form>
         <Form.Group controlId="formGroupUser" >
