@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
-import Form from 'react-bootstrap/Form'
 import Badge from 'react-bootstrap/Badge'
+import Spinner from 'react-bootstrap/Spinner'
 
 const uuid = require('uuidv4');
 class ViewTagsModal extends React.Component {
@@ -45,8 +45,8 @@ class ViewTagsModal extends React.Component {
         </Modal.Header>
         <Modal.Body>
         <h5>Here's what users have said about {this.props.locationName}:</h5>
-          {(this.props.modalData[0]) && this.props.modalData.map(lt => {
-            return <div><Badge key={uuid()}variant="info">{lt.username}:</Badge> {lt.review}<br/></div>})}
+          {(this.props.modalData[0]) ? this.props.modalData.map(lt => {
+            return <div key={uuid()}><Badge key={uuid()} variant="info">{lt.username}:</Badge> {lt.review}<br/></div>}) : <center><Spinner animation="grow" variant="success"></Spinner></center>}
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.props.onHide}>Close</Button>
