@@ -13,7 +13,7 @@ import './App.css';
 import image from './background.jpg'
 
 
-const URL = "https://b6069cf8.ngrok.io/"
+const URL = "https://294ae131.ngrok.io/"
 class App extends Component {
 
 

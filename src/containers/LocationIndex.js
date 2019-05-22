@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import LocationCard from '../components/LocationCard.js'
 import Spinner from 'react-bootstrap/Spinner'
 
-const URL = "https://b6069cf8.ngrok.io/"
+const URL = "https://294ae131.ngrok.io/"
 
 class LocationIndex extends Component {
 

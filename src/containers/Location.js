@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import LocationCarousel from '../components/LocationCarousel.js'
 import LandmarkCarousel from '../components/LandmarkCarousel.js'
 import LandmarkModal from '../components/LandmarkModal.js'
+import ViewTagsModal from '../components/ViewTagsModal.js'
 import GoogleMapsRender from '../components/GoogleMapsRender.js'
 // import Title from '../components/Title.js'
 import Tags from '../components/Tags.js'
 
-import TagModal from '../components/TagModal.js'
+import NewTagModal from '../components/NewTagModal.js'
 
-const URL = "https://b6069cf8.ngrok.io/"
+const URL = "https://294ae131.ngrok.io/"
 
 class Location extends Component {
 
@@ -22,7 +23,9 @@ class Location extends Component {
     description: null,
     modalData: false,
     tagModalData: false,
-    tagModalOpen: false
+    tagModalOpen: false,
+    viewTagModalOpen: false,
+    viewTagModalData: {}
   }
 
   style = {
@@ -49,11 +52,11 @@ class Location extends Component {
     .then(response => this.setState({...response}))
   }
 
+// landmark modal
   modalClose = () => this.setState({ modalData: false });
-
   modalOpen = (landmarkId) => this.setState({modalData: this.state.landmarks.find(landmark => landmark.id === landmarkId)})
 
-
+// Modal for adding a new tag
   addTags = () => {
     fetch(URL+`tags/${this.state.id}`, {
       method: 'GET',
@@ -64,14 +67,13 @@ class Location extends Component {
     .then(res=>res.json())
     .then(res => this.setState({tagModalData: res}))
   }
-
-  openTagModal = () => {
+  openNewTagModal = () => {
+    // consider switching order and debugging
     this.addTags()
     this.setState({tagModalOpen: true})
   }
   tagModalClose = () => this.setState({tagModalOpen: false})
   tagModalSubmit = (tag_id, review) => {
-    console.log(tag_id, review)
     fetch(URL+`tags/${this.state.id}`,{
       method: 'POST',
       body: JSON.stringify({tag_id: tag_id, review: review}),
@@ -89,12 +91,30 @@ class Location extends Component {
     })
   }
 
+  // modal for viewing reviews
+  openViewTagsModal = (id) => {
+    this.setState({viewTagModalOpen: id})
+    fetch(URL+`locationtags/${this.state.id}/${id}`, {
+      method: 'GET',
+      headers: {
+        "Authorization": localStorage.getItem("token")
+      }
+    })
+    .then(res=>res.json())
+    .then(res => this.setState({viewTagModalData: res}))
+  }
+  viewModalClose = () => {
+    this.setState({viewTagModalOpen: false, viewTagModalData: {}})
+  }
+
+
   render(){
+    console.log(this.state)
     return (
       <div style={this.style}>
       <LocationCarousel name={this.state.name} images={this.state.locimages} key="Carousel"/>
       {this.state.description}
-      <center style={this.tagStyle}>RECOMMENDED FOR:<br/> <Tags openTagModal={this.openTagModal} tags={this.state.tags}/></center><br/>
+      <center style={this.tagStyle}>RECOMMENDED FOR:<br/> <Tags openViewTagsModal={this.openViewTagsModal} openNewTagModal={this.openNewTagModal} tags={this.state.tags}/></center><br/>
       {this.props.latitude && (<GoogleMapsRender lat={this.props.latitude} long={this.props.longitude} />)}
       <br />
       <div style={this.tagStyle}>LANDMARKS TO SEE:</div>
@@ -103,12 +123,18 @@ class Location extends Component {
         modalData={this.state.modalData}
         onHide={this.modalClose}
       />
-      <TagModal
+      <NewTagModal
         locationName={this.state.name}
         modalData={this.state.tagModalData}
         tagModalOpen={this.state.tagModalOpen}
         onHide={this.tagModalClose}
         onSubmit={this.tagModalSubmit}
+      />
+      <ViewTagsModal
+        locationName={this.state.name}
+        modalData={this.state.viewTagModalData}
+        viewModalOpen={this.state.viewTagModalOpen}
+        onHide={this.viewModalClose}
       />
       </div>
     )

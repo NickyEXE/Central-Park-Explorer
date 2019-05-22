@@ -6,9 +6,9 @@ function Tags(props) {
     return (
     <div>
     {props.tags.map(tag => {
-      return(<Badge pill variant="warning" key={uuid()}>{tag.tag}</Badge>)}
+      return(<Badge pill variant="warning" onClick={() => props.openViewTagsModal(tag.id)}key={uuid()}>{tag.tag}</Badge>)}
     )}
-    <Badge pill variant="dark" onClick={props.openTagModal} key={uuid()}>Add Recommendation</Badge>
+    <Badge pill variant="dark" onClick={props.openNewTagModal} key={uuid()}>Add Recommendation</Badge>
     </div>
 )}
   else {

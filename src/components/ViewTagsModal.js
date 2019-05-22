@@ -3,12 +3,13 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Image from 'react-bootstrap/Image'
 import Form from 'react-bootstrap/Form'
+import Badge from 'react-bootstrap/Badge'
 
-class TagModal extends React.Component {
+const uuid = require('uuidv4');
+class ViewTagsModal extends React.Component {
 
 
   state ={
-    selectedTag: {id: 0},
     userReview: ""
   }
 
@@ -27,10 +28,11 @@ class TagModal extends React.Component {
   }
 
   render() {
+    console.log("modal info", this.props)
     return (
       <Modal
         // {...this.props}
-        show={!!this.props.tagModalOpen}
+        show={!!this.props.viewModalOpen}
         onHide={this.props.onHide}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
@@ -38,26 +40,13 @@ class TagModal extends React.Component {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            {this.props.locationName}
+            {this.props.locationName} {this.props.modalData[0] ? `is marked great for ${this.props.modalData[0].tag}.` : ""}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <Form>
-          <Form.Group controlId="exampleForm.ControlSelect1">
-            <Form.Label>Add a tag</Form.Label>
-            <Form.Control onChange={this.onTagSelect} placeholder="select" value={this.state.selectedTag.id} as="select">
-              <option disabled value={0} key={0}>Select a tag to review {this.props.locationName} for</option>
-              {this.props.modalData && this.props.modalData.map(tag => <option key={tag.id} value={tag.id}>{tag.tag}</option>)}
-            </Form.Control>
-          </Form.Group>
-          {this.state.selectedTag.id > 0 && <Form.Group controlId="exampleForm.ControlTextarea1">
-            <Form.Label>Why is {this.props.locationName} good for {this.state.selectedTag.tag}</Form.Label>
-            <Form.Control as="textarea" rows="3" value={this.state.userReview} onChange={this.onTextChange} />
-          </Form.Group>}
-          <Button variant="primary" type="submit" onClick={this.onSubmit}>
-            Submit
-          </Button>
-        </Form>
+        <h5>Here's what users have said about {this.props.locationName}:</h5>
+          {(this.props.modalData[0]) && this.props.modalData.map(lt => {
+            return <div><Badge key={uuid()}variant="info">{lt.username}:</Badge> {lt.review}<br/></div>})}
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.props.onHide}>Close</Button>
@@ -95,4 +84,4 @@ class TagModal extends React.Component {
 //   }
 // }
 //
-export default TagModal
+export default ViewTagsModal
