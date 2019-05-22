@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Location from './containers/Location.js'
 import LocationIndex from './containers/LocationIndex.js'
+import Profile from './containers/Profile.js'
 import LocationRequester from './components/LocationRequester.js'
 import CreateUser from './components/CreateUser.js'
 import SelectInterests from './components/SelectInterests.js'
 import Login from './components/Login.js'
 import Navigator from './components/Navigator.js'
-
-import logo from './logo.svg';
 import './App.css';
 import image from './background.jpg'
 
@@ -75,6 +74,14 @@ class App extends Component {
     this.props.history.push('/locations')
   }
 
+  goToProfile = () => {
+    this.props.history.push('/profile')
+  }
+
+  goToLocation = (id) => {
+    this.props.history.push(`/locations/${id}`)
+  }
+
   getLocationData =(position) => {
     this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude})
   }
@@ -102,14 +109,14 @@ class App extends Component {
   }
 
   render(){
-    console.log(this.state)
     return (
       <div style={this.background}>
       <div style ={this.style}>
       <LocationRequester getLocationData={this.getLocationData} />
-      <Navigator currentuser={this.state.currentuser} goToIndex={this.goToIndex} logout={this.logout} />
+      <Navigator currentuser={this.state.currentuser} goToIndex={this.goToIndex} goToProfile={this.goToProfile} logout={this.logout} />
       <Switch>
         <Route path='/login' render={(routeProps) => <Login {...routeProps} setCurrentUser={this.setCurrentUser} />}/>
+        <Route path='/profile' render={(routeProps) => <Profile {...routeProps} goToLocation={this.goToLocation} setCurrentUser={this.setCurrentUser}/>}/>
         <Route path='/interests' render={(routeProps) => <SelectInterests {...routeProps} setCurrentUser={this.setCurrentUser} />}/>
         <Route path='/users/create' render={(routeProps) => <CreateUser {...routeProps} setCurrentUser={this.setCurrentUser} /> } />
         <Route path='/locations/:id' render={(routeProps) => <Location {...routeProps} {...this.state} />} />

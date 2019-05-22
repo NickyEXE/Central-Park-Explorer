@@ -8,7 +8,7 @@ import GoogleMapsRender from '../components/GoogleMapsRender.js'
 import Tags from '../components/Tags.js'
 
 import NewTagModal from '../components/NewTagModal.js'
-
+const uuid = require('uuidv4');
 const URL = "https://294ae131.ngrok.io/"
 
 class Location extends Component {
@@ -111,10 +111,10 @@ class Location extends Component {
   render(){
     console.log(this.state)
     return (
-      <div style={this.style}>
-      <LocationCarousel name={this.state.name} images={this.state.locimages} key="Carousel"/>
+      <div style={this.style} key={uuid()}>
+      <LocationCarousel name={this.state.name} images={this.state.locimages} key={uuid()}/>
       {this.state.description}
-      <center style={this.tagStyle}>RECOMMENDED FOR:<br/> <Tags openViewTagsModal={this.openViewTagsModal} openNewTagModal={this.openNewTagModal} tags={this.state.tags}/></center><br/>
+      <center style={this.tagStyle}>RECOMMENDED FOR:<br/> <Tags openViewTagsModal={this.openViewTagsModal} openNewTagModal={this.openNewTagModal} tags={this.state.tags} key={uuid()}/></center><br/>
       {this.props.latitude && (<GoogleMapsRender lat={this.props.latitude} long={this.props.longitude} />)}
       <br />
       <div style={this.tagStyle}>LANDMARKS TO SEE:</div>

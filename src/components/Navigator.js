@@ -12,6 +12,7 @@ const Navigator = (props) =>  {
         <Nav className="mr-auto">
           {props.currentuser ? <Nav.Link onClick={props.logout}>Logout</Nav.Link> : <Nav.Link href="/login">Login</Nav.Link>}
           <Nav.Link onClick={props.goToIndex}>View All Locations</Nav.Link>
+          <Nav.Link onClick={props.goToProfile}>View Your Profile</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
