@@ -41,7 +41,6 @@ class SelectInterests extends Component {
 
   onSubmit = () => {
     const token = localStorage.getItem("token")
-    console.log(this.state.interests.filter(interest => interest.checked).map(interest => interest.id))
     fetch(URL+"interests/",{
       method: 'POST', // or 'PUT'
       body: JSON.stringify({interest_ids: this.state.interests.filter(interest => interest.checked).map(interest => interest.id)}), // data can be `string` or {object}!
