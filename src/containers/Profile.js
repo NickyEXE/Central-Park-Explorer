@@ -94,7 +94,6 @@ class Profile extends Component {
       <center><Spinner animation="grow" variant="success"></Spinner></center>
     )
   }
-
   }
 }
 

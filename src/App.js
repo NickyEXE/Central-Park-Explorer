@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Location from './containers/Location.js'
 import LocationIndex from './containers/LocationIndex.js'
 import Profile from './containers/Profile.js'
@@ -86,8 +86,11 @@ class App extends Component {
     this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude})
   }
 
+
+
   style = {
     maxWidth: '500px',
+    height: '100%',
     textAlign: 'center',
     align: 'center',
     marginLeft: "auto",
@@ -104,6 +107,7 @@ class App extends Component {
    backgroundImage: `url(${image})`,
    backgroundColor: 'rgba(0,0,0,.25)',
    backgroundSize: `cover`,
+   height: '100%',
    backgroundRepeat: `no-repeat`,
    backgroundPosition: 'bottom'
   }
@@ -121,6 +125,7 @@ class App extends Component {
         <Route path='/users/create' render={(routeProps) => <CreateUser {...routeProps} setCurrentUser={this.setCurrentUser} /> } />
         <Route path='/locations/:id' render={(routeProps) => <Location {...routeProps} {...this.state} />} />
         <Route path='/locations' render={(routeProps) => <LocationIndex {...routeProps} setCurrentUser={this.setCurrentUser} />}/>
+        <Route exact path='/' render={(routeProps) => <Redirect {...routeProps} to='/locations'/>}/>
       </Switch>
       </div>
       </div>
