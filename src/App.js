@@ -49,6 +49,11 @@ class App extends Component {
       return this.props.history.push('/login')}}
 	}
 
+// app should only update once, when the user logs in
+  shouldComponentUpdate(nextProps, nextState){
+    return !(this.state.currentuser && this.state.latitude)
+  }
+
 
 
   setCurrentUser = (response) => {
@@ -142,6 +147,7 @@ class App extends Component {
   }
 
   render(){
+    console.log("the state of app", this.state)
     return (
       <div style={this.background}>
       <div style ={this.style}>
