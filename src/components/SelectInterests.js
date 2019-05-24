@@ -28,7 +28,7 @@ class SelectInterests extends Component {
     this.setState(
       {interests: this.state.interests.map(interest =>
         {
-          if (interest.id == e.target.id){
+          if (interest.id === e.target.id){
             return Object.assign(interest, {checked: !interest.checked})
           }
           else {

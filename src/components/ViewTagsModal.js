@@ -1,12 +1,11 @@
 import React, {Component} from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
-import Image from 'react-bootstrap/Image'
 import Badge from 'react-bootstrap/Badge'
 import Spinner from 'react-bootstrap/Spinner'
 
 const uuid = require('uuidv4');
-class ViewTagsModal extends React.Component {
+class ViewTagsModal extends Component {
 
 
   state ={
@@ -14,7 +13,7 @@ class ViewTagsModal extends React.Component {
   }
 
   onTagSelect = (e) => {
-    const tag = this.props.modalData.find(tag => tag.id == e.target.value)
+    const tag = this.props.modalData.find(tag => tag.id === e.target.value)
     this.setState({selectedTag: tag, userReview: tag.user_review})
   }
 
@@ -28,7 +27,6 @@ class ViewTagsModal extends React.Component {
   }
 
   render() {
-    console.log("modal info", this.props)
     return (
       <Modal
         // {...this.props}

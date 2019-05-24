@@ -35,7 +35,6 @@ class App extends Component {
 			})
 			.then(res => res.json())
 			.then(response => {
-        console.log("logging in with this response", response)
 				if (response.errors) {
 					alert(response.errors, "Logout and try again")
 				} else {
@@ -49,6 +48,8 @@ class App extends Component {
       if (this.props.history.location.pathname !== "/users/create") {
       return this.props.history.push('/login')}}
 	}
+
+
 
   setCurrentUser = (response) => {
     localStorage.removeItem("token")
@@ -103,6 +104,34 @@ class App extends Component {
     backgroundPosition: 'center'
   }
 
+  goToMyLocation = () => {
+    if (this.state.latitude){
+      fetch(URL+"locations/", {
+        method: 'POST',
+        body: JSON.stringify({latitude: this.state.latitude, longitude: this.state.longitude}),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          "Authorization": localStorage.getItem("token")}
+      })
+      .then(response => response.json())
+      .then(response => this.interpretGoToMyLocationResponse(response))
+    }
+    else {
+      alert("We can't find your location. Try enabling it!")
+    }
+  }
+
+
+  interpretGoToMyLocationResponse = (response) => {
+    if (response.id){
+      this.goToLocation(response.id)
+    }
+    else {
+      alert(response.error)
+    }
+  }
+
   background = {
    backgroundImage: `url(${image})`,
    backgroundColor: 'rgba(0,0,0,.25)',
@@ -117,7 +146,7 @@ class App extends Component {
       <div style={this.background}>
       <div style ={this.style}>
       <LocationRequester getLocationData={this.getLocationData} />
-      <Navigator currentuser={this.state.currentuser} goToIndex={this.goToIndex} goToProfile={this.goToProfile} logout={this.logout} />
+      <Navigator currentuser={this.state.currentuser} goToIndex={this.goToIndex} goToMyLocation={this.goToMyLocation} goToProfile={this.goToProfile} logout={this.logout} />
       <Switch>
         <Route path='/login' render={(routeProps) => <Login {...routeProps} setCurrentUser={this.setCurrentUser} />}/>
         <Route path='/profile' render={(routeProps) => <Profile {...routeProps} goToLocation={this.goToLocation} setCurrentUser={this.setCurrentUser}/>}/>

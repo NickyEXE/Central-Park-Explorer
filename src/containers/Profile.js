@@ -3,7 +3,6 @@ import Spinner from 'react-bootstrap/Spinner'
 import Container from 'react-bootstrap/Container'
 import Badge from 'react-bootstrap/Badge'
 import Button from 'react-bootstrap/Button'
-import Nav from 'react-bootstrap/Nav'
 const URL = "https://294ae131.ngrok.io/"
 const uuid = require('uuidv4')
 

@@ -1,7 +1,6 @@
 import React from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
-import NavDropdown from 'react-bootstrap/NavDropdown'
 
 const Navigator = (props) =>  {
   return (
@@ -13,6 +12,7 @@ const Navigator = (props) =>  {
           {props.currentuser ? <Nav.Link onClick={props.logout}>Logout</Nav.Link> : <Nav.Link href="/login">Login</Nav.Link>}
           <Nav.Link onClick={props.goToIndex}>View All Locations</Nav.Link>
           <Nav.Link onClick={props.goToProfile}>View Your Profile</Nav.Link>
+          <Nav.Link onClick={props.goToMyLocation}>Where am I now?</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

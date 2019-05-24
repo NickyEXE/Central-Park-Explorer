@@ -1,11 +1,9 @@
 import React, {Component} from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
-import Image from 'react-bootstrap/Image'
 import Form from 'react-bootstrap/Form'
 
-class NewTagModal extends React.Component {
-
+class NewTagModal extends Component {
 
   state ={
     selectedTag: {id: 0},
@@ -13,7 +11,7 @@ class NewTagModal extends React.Component {
   }
 
   onTagSelect = (e) => {
-    const tag = this.props.modalData.find(tag => tag.id == e.target.value)
+    const tag = this.props.modalData.find(tag => tag.id === e.target.value)
     this.setState({selectedTag: tag, userReview: tag.user_review})
   }
 

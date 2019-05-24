@@ -1,10 +1,9 @@
 import React, {Component} from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
-import Image from 'react-bootstrap/Image'
 
 
-class LandmarkModal extends React.Component {
+class LandmarkModal extends Component {
 
 
   render() {
