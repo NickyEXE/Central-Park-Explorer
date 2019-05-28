@@ -71,7 +71,7 @@ class Profile extends Component {
     <ul>
     {this.state.interests.map(interest => <li key={interest.id}>{interest.name}</li>)}
     </ul>
-    <h5>You recently left tags at the following locations:</h5>
+    {this.state.reviews.length > 0 ? <h5>You recently left tags at the following locations:</h5> : <h5>You have not left any reviews at any place in Central Park. Get exploring!</h5> }
     {this.state.reviews.map(review => {return(
       <div key={review.id}>
       <div onClick={() => this.props.goToLocation(review.location.id)}>

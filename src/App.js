@@ -171,6 +171,7 @@ class App extends Component {
    backgroundColor: 'rgba(0,0,0,.25)',
    backgroundSize: `cover`,
    height: '100%',
+   minHeight: `${window.innerHeight}px`,
    backgroundRepeat: `no-repeat`,
    backgroundPosition: 'bottom'
   }
