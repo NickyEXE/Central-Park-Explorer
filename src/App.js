@@ -20,7 +20,9 @@ class App extends Component {
   state = {
     currentuser: null,
     latitude: null,
-    longitude: null
+    longitude: null,
+    currentLocation: null,
+    nearestPlaces: []
   }
 
 
@@ -54,7 +56,32 @@ class App extends Component {
     return !(this.state.currentuser && this.state.latitude)
   }
 
+  getCurrentAndNearestLocations = () => {
+      fetch(URL+"locations/", {
+        method: 'POST',
+        body: JSON.stringify({latitude: this.state.latitude, longitude: this.state.longitude}),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          "Authorization": localStorage.getItem("token")}
+      })
+      .then(response => response.json())
+      .then(response => this.setStateFromLocationsResponse(response))
+  }
 
+  setStateFromLocationsResponse = (response) => {
+    if (response.nearest_places){
+      if (response.current_location){
+        this.setState({currentLocation: response.current_location, nearestPlaces: response.nearest_places})
+      }
+      else {
+        this.setState({currentLocation: "Outside Park", nearestPlaces: response.nearest_places})
+      }
+    }
+    else{
+      alert("You don't have location enabled.")
+    }
+  }
 
   setCurrentUser = (response) => {
     localStorage.removeItem("token")
@@ -85,12 +112,12 @@ class App extends Component {
   }
 
   goToLocation = (id) => {
-
     this.props.history.push(`/locations/${id}`)
   }
 
   getLocationData =(position) => {
     this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude})
+    this.getCurrentAndNearestLocations()
   }
 
 
@@ -130,11 +157,14 @@ class App extends Component {
 
 
   interpretGoToMyLocationResponse = (response) => {
-    if (response.id){
-      this.goToLocation(response.id)
+    if (this.state.currentLocation !== "Outside Park"){
+      this.goToLocation(this.state.currentLocation.id)
+    }
+    else if (this.state.currentLocation === "Outside Park"){
+      alert("You're not in Central Park!")
     }
     else {
-      alert(response.error)
+      console.log("Still loading location")
     }
   }
 
