@@ -113,6 +113,11 @@ class App extends Component {
     this.props.history.push(`/locations/${id}`)
   }
 
+  goToAddInterests = () => {
+    this.props.history.push('/interests')
+  }
+
+
   getLocationData =(position) => {
     this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude})
     this.getCurrentAndNearestLocations()
@@ -185,7 +190,7 @@ class App extends Component {
         <Navigator currentuser={this.state.currentuser} goToIndex={this.goToIndex} goToMyLocation={this.goToMyLocation} goToProfile={this.goToProfile} logout={this.logout} />
         <Switch>
           <Route path='/login' render={(routeProps) => <Login {...routeProps} setCurrentUser={this.setCurrentUser} />}/>
-          <Route path='/profile' render={(routeProps) => <Profile {...routeProps} goToLocation={this.goToLocation} setCurrentUser={this.setCurrentUser}/>}/>
+          <Route path='/profile' render={(routeProps) => <Profile {...routeProps} goToAddInterests={this.goToAddInterests} goToLocation={this.goToLocation} setCurrentUser={this.setCurrentUser}/>}/>
           <Route path='/interests' render={(routeProps) => <SelectInterests {...routeProps} setCurrentUser={this.setCurrentUser} />}/>
           <Route path='/users/create' render={(routeProps) => <CreateUser {...routeProps} setCurrentUser={this.setCurrentUser} /> } />
           <Route path='/locations/:id' render={(routeProps) => <Location {...routeProps} goToLocation={this.goToLocation} {...this.state} />} />

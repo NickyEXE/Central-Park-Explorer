@@ -67,10 +67,12 @@ class Profile extends Component {
     return(
     <Container style={this.style}>
     <h1 >Welcome {this.state.username}</h1>
-    <h5>According to our records, you're interested in...</h5>
+    {this.state.interests.length > 0 ? <h5>According to our records, you're interested in...</h5> : <h5> You haven't added any interests!</h5>}
     <ul>
     {this.state.interests.map(interest => <li key={interest.id}>{interest.name}</li>)}
     </ul>
+    <center><Button onClick={() => this.props.goToAddInterests()}>Add some interests!</Button></center>
+    <br/>
     {this.state.reviews.length > 0 ? <h5>You recently left tags at the following locations:</h5> : <h5>You have not left any reviews at any place in Central Park. Get exploring!</h5> }
     {this.state.reviews.map(review => {return(
       <div key={review.id}>
