@@ -85,6 +85,7 @@ class App extends Component {
   }
 
   goToLocation = (id) => {
+
     this.props.history.push(`/locations/${id}`)
   }
 

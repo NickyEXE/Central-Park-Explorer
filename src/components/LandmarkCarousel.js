@@ -7,11 +7,6 @@ class LandmarkCarousel extends Component {
     super(props, context);
 
     this.handleSelect = this.handleSelect.bind(this);
-
-    this.state = {
-      index: 0,
-      direction: null,
-    };
   }
 
   uuid = require('uuidv4');
@@ -23,8 +18,8 @@ class LandmarkCarousel extends Component {
     });
   }
 
+
   render() {
-    const { index, direction } = this.state;
     const imageStyle =
     {
     objectPosition: 'center',
@@ -33,8 +28,6 @@ class LandmarkCarousel extends Component {
     if (this.props.landmarks.length > 0) {
       return (
         <Carousel
-          activeIndex={index}
-          direction={direction}
           onSelect={this.handleSelect}
         >
         {this.props.landmarks.map(landmark => {

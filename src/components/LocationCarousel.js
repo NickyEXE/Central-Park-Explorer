@@ -8,10 +8,7 @@ class LocationCarousel extends Component {
 
     this.handleSelect = this.handleSelect.bind(this);
 
-    this.state = {
-      index: 0,
-      direction: null,
-    };
+
   }
 
   uuid = require('uuidv4');
@@ -24,7 +21,6 @@ class LocationCarousel extends Component {
   }
 
   render() {
-    const { index, direction } = this.state;
     const imageStyle =
     {
     objectPosition: 'center',
@@ -32,11 +28,7 @@ class LocationCarousel extends Component {
     height: '250px'}
     if (this.props.images.length > 0) {
       return (
-        <Carousel
-          activeIndex={index}
-          direction={direction}
-          onSelect={this.handleSelect}
-        >
+        <Carousel onSelect={this.handleSelect}>
         {this.props.images.map(image => {
           return(
           <Carousel.Item key={this.uuid()}>
