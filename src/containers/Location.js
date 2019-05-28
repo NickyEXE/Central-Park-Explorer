@@ -4,12 +4,13 @@ import LandmarkCarousel from '../components/LandmarkCarousel.js'
 import LandmarkModal from '../components/LandmarkModal.js'
 import ViewTagsModal from '../components/ViewTagsModal.js'
 import GoogleMapsRender from '../components/GoogleMapsRender.js'
+import NearbyPlaces from '../components/NearbyPlaces.js'
 // import Title from '../components/Title.js'
 import Tags from '../components/Tags.js'
 
 import NewTagModal from '../components/NewTagModal.js'
 const uuid = require('uuidv4');
-const URL = "https://294ae131.ngrok.io/"
+const URL = "https://eac02862.ngrok.io/"
 
 class Location extends Component {
 
@@ -43,6 +44,16 @@ class Location extends Component {
 
   // componentWillReceivePropsz
   componentDidMount(){
+    this.updateWholePage()
+  }
+  //
+   componentDidUpdate(prevProps){
+    if (prevProps.match.params.id !== this.props.match.params.id){
+    this.updateWholePage()}
+  }
+
+  updateWholePage = () => {
+    console.log("in update", this.props.match.params.id)
     fetch(URL+"locations/"+this.props.match.params.id, {
       method: 'GET',
       headers: {
@@ -52,6 +63,7 @@ class Location extends Component {
     .then(response => response.json())
     .then(response => this.setState({...response}))
   }
+
 
 // landmark modal
   modalClose = () => this.setState({ modalData: false });
@@ -92,11 +104,6 @@ class Location extends Component {
     })
   }
 
-  determineIfInLocation = () => {
-
-
-  }
-
   // modal for viewing reviews
   openViewTagsModal = (id) => {
     this.setState({viewTagModalOpen: id})
@@ -122,10 +129,13 @@ class Location extends Component {
       <LocationCarousel name={this.state.name} images={this.state.locimages} key={uuid()}/>
       {this.state.description}
       <center style={this.tagStyle}>RECOMMENDED FOR:<br/> <Tags openViewTagsModal={this.openViewTagsModal} openNewTagModal={this.openNewTagModal} tags={this.state.tags} key={uuid()}/></center><br/>
+      <div style={this.tagStyle}>YOU ARE HERE:</div>
       {this.props.latitude && (<GoogleMapsRender lat={this.props.latitude} long={this.props.longitude} />)}
       <br />
       <div style={this.tagStyle}>LANDMARKS TO SEE:</div>
       <LandmarkCarousel modalOpen={this.modalOpen} landmarks={this.state.landmarks}/>
+      <div style={this.tagStyle}>NEARBY PLACES:</div>
+      {this.props.nearestPlaces && <NearbyPlaces goToLocation={this.props.goToLocation} nearestPlaces={this.props.nearestPlaces}/>}
       <LandmarkModal
         modalData={this.state.modalData}
         onHide={this.modalClose}

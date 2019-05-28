@@ -12,7 +12,7 @@ import './App.css';
 import image from './background.jpg'
 
 
-const URL = "https://294ae131.ngrok.io/"
+const URL = "https://eac02862.ngrok.io/"
 class App extends Component {
 
 
@@ -51,11 +51,11 @@ class App extends Component {
       return this.props.history.push('/login')}}
 	}
 
-// app should only update once, when the user logs in
+// app should only update when the user logs in or when current location changes
 // edit, this is no longer true as we're tracking locations
-  // shouldComponentUpdate(nextProps, nextState){
-  //   return !(this.state.currentuser && this.state.latitude)
-  // }
+  shouldComponentUpdate(nextProps, nextState){
+    return !(this.state.currentuser && (this.state.latitude && this.state.currentLocation))
+  }
 
   getCurrentAndNearestLocations = () => {
       fetch(URL+"locations/", {
@@ -78,9 +78,6 @@ class App extends Component {
       else {
         this.setState({currentLocation: "Outside Park", nearestPlaces: response.nearest_places})
       }
-    }
-    else{
-      alert("You don't have location enabled.")
     }
   }
 
@@ -190,8 +187,8 @@ class App extends Component {
         <Route path='/profile' render={(routeProps) => <Profile {...routeProps} goToLocation={this.goToLocation} setCurrentUser={this.setCurrentUser}/>}/>
         <Route path='/interests' render={(routeProps) => <SelectInterests {...routeProps} setCurrentUser={this.setCurrentUser} />}/>
         <Route path='/users/create' render={(routeProps) => <CreateUser {...routeProps} setCurrentUser={this.setCurrentUser} /> } />
-        <Route path='/locations/:id' render={(routeProps) => <Location {...routeProps} {...this.state} />} />
-        <Route path='/locations' render={(routeProps) => <LocationIndex {...routeProps} currentLocation={this.state.currentLocation} nearestPlaces={this.state.nearestPlaces} />}/>
+        <Route path='/locations/:id' render={(routeProps) => <Location {...routeProps} goToLocation={this.goToLocation} {...this.state} />} />
+        <Route path='/locations' render={(routeProps) => <LocationIndex {...routeProps}  currentLocation={this.state.currentLocation} nearestPlaces={this.state.nearestPlaces} />}/>
         <Route exact path='/' render={(routeProps) => <Redirect {...routeProps} to='/locations'/>}/>
       </Switch>
       </div>

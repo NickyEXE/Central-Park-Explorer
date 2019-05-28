@@ -16,7 +16,7 @@ class LocationRequester extends Component {
   geo_options = {
     enableHighAccuracy: true,
     maximumAge: 30000,
-    timeout: 200000
+    timeout: 20000
   };
 
   render() {
