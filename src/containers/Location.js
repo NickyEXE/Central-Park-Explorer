@@ -41,7 +41,7 @@ class Location extends Component {
     align: 'center'
   }
 
-  // componentWillReceiveProps
+  // componentWillReceivePropsz
   componentDidMount(){
     fetch(URL+"locations/"+this.props.match.params.id, {
       method: 'GET',
@@ -92,6 +92,11 @@ class Location extends Component {
     })
   }
 
+  determineIfInLocation = () => {
+
+
+  }
+
   // modal for viewing reviews
   openViewTagsModal = (id) => {
     this.setState({viewTagModalOpen: id})
@@ -110,6 +115,8 @@ class Location extends Component {
 
 
   render(){
+    console.log("location props", this.props)
+    console.log("location state", this.state)
     return (
       <div style={this.style} key={uuid()}>
       <LocationCarousel name={this.state.name} images={this.state.locimages} key={uuid()}/>

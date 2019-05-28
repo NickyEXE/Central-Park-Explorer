@@ -29,6 +29,7 @@ class LocationIndex extends Component {
 
 
   render(){
+    console.log(this.props)
     if (this.state.locations.length > 0){
       return (
         this.state.locations.map(location => <LocationCard key={this.uuid()} {...location} locationCardOnClick={this.locationCardOnClick}/>)

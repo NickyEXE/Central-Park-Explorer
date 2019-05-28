@@ -18,7 +18,6 @@ class LandmarkCarousel extends Component {
     });
   }
 
-
   render() {
     const imageStyle =
     {

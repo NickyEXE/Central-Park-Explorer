@@ -52,9 +52,10 @@ class App extends Component {
 	}
 
 // app should only update once, when the user logs in
-  shouldComponentUpdate(nextProps, nextState){
-    return !(this.state.currentuser && this.state.latitude)
-  }
+// edit, this is no longer true as we're tracking locations
+  // shouldComponentUpdate(nextProps, nextState){
+  //   return !(this.state.currentuser && this.state.latitude)
+  // }
 
   getCurrentAndNearestLocations = () => {
       fetch(URL+"locations/", {
@@ -190,7 +191,7 @@ class App extends Component {
         <Route path='/interests' render={(routeProps) => <SelectInterests {...routeProps} setCurrentUser={this.setCurrentUser} />}/>
         <Route path='/users/create' render={(routeProps) => <CreateUser {...routeProps} setCurrentUser={this.setCurrentUser} /> } />
         <Route path='/locations/:id' render={(routeProps) => <Location {...routeProps} {...this.state} />} />
-        <Route path='/locations' render={(routeProps) => <LocationIndex {...routeProps} setCurrentUser={this.setCurrentUser} />}/>
+        <Route path='/locations' render={(routeProps) => <LocationIndex {...routeProps} currentLocation={this.state.currentLocation} nearestPlaces={this.state.nearestPlaces} />}/>
         <Route exact path='/' render={(routeProps) => <Redirect {...routeProps} to='/locations'/>}/>
       </Switch>
       </div>
