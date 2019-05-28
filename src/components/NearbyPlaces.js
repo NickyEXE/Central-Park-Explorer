@@ -8,7 +8,7 @@ const uuid = require('uuidv4');
 const NearbyPlaces = (props) => {
   return(
     <div>
-  {props.nearestPlaces.map(place => <div key={uuid()}><Button key={uuid()} onClick={()=> props.goToLocation(place.id)}>{place.name}</Button></div>)}
+  {props.nearestPlaces.map(place => <p key={uuid()}><Button key={uuid()} onClick={()=> props.goToLocation(place.id)}>{place.name}</Button></p>)}
     </div>
   )
 }
