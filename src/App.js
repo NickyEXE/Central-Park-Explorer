@@ -179,21 +179,21 @@ class App extends Component {
     console.log("the state of app", this.state)
     return (
       <div style={this.background}>
-      <div style ={this.style}>
-      <LocationRequester getLocationData={this.getLocationData} />
-      <Navigator currentuser={this.state.currentuser} goToIndex={this.goToIndex} goToMyLocation={this.goToMyLocation} goToProfile={this.goToProfile} logout={this.logout} />
-      <Switch>
-        <Route path='/login' render={(routeProps) => <Login {...routeProps} setCurrentUser={this.setCurrentUser} />}/>
-        <Route path='/profile' render={(routeProps) => <Profile {...routeProps} goToLocation={this.goToLocation} setCurrentUser={this.setCurrentUser}/>}/>
-        <Route path='/interests' render={(routeProps) => <SelectInterests {...routeProps} setCurrentUser={this.setCurrentUser} />}/>
-        <Route path='/users/create' render={(routeProps) => <CreateUser {...routeProps} setCurrentUser={this.setCurrentUser} /> } />
-        <Route path='/locations/:id' render={(routeProps) => <Location {...routeProps} goToLocation={this.goToLocation} {...this.state} />} />
-        <Route path='/locations' render={(routeProps) => <LocationIndex {...routeProps}  currentLocation={this.state.currentLocation} nearestPlaces={this.state.nearestPlaces} />}/>
-        <Route exact path='/' render={(routeProps) => <Redirect {...routeProps} to='/locations'/>}/>
-      </Switch>
+        <div style ={this.style}>
+        <LocationRequester getLocationData={this.getLocationData} />
+        <Navigator currentuser={this.state.currentuser} goToIndex={this.goToIndex} goToMyLocation={this.goToMyLocation} goToProfile={this.goToProfile} logout={this.logout} />
+        <Switch>
+          <Route path='/login' render={(routeProps) => <Login {...routeProps} setCurrentUser={this.setCurrentUser} />}/>
+          <Route path='/profile' render={(routeProps) => <Profile {...routeProps} goToLocation={this.goToLocation} setCurrentUser={this.setCurrentUser}/>}/>
+          <Route path='/interests' render={(routeProps) => <SelectInterests {...routeProps} setCurrentUser={this.setCurrentUser} />}/>
+          <Route path='/users/create' render={(routeProps) => <CreateUser {...routeProps} setCurrentUser={this.setCurrentUser} /> } />
+          <Route path='/locations/:id' render={(routeProps) => <Location {...routeProps} goToLocation={this.goToLocation} {...this.state} />} />
+          <Route path='/locations' render={(routeProps) => <LocationIndex {...routeProps}  currentLocation={this.state.currentLocation} nearestPlaces={this.state.nearestPlaces} />}/>
+          <Route exact path='/' render={(routeProps) => <Redirect {...routeProps} to='/locations'/>}/>
+        </Switch>
+        </div>
       </div>
-      </div>
-    );}
+    )}
 }
 
 export default App;
