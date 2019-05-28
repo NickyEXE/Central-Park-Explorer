@@ -26,6 +26,7 @@ class Location extends Component {
     tagModalData: false,
     tagModalOpen: false,
     viewTagModalOpen: false,
+    nearby_places: [],
     viewTagModalData: {}
   }
 
@@ -42,11 +43,10 @@ class Location extends Component {
     align: 'center'
   }
 
-  // componentWillReceivePropsz
   componentDidMount(){
     this.updateWholePage()
   }
-  //
+  //forces an update if they change the url
    componentDidUpdate(prevProps){
     if (prevProps.match.params.id !== this.props.match.params.id){
     this.updateWholePage()}
@@ -122,8 +122,6 @@ class Location extends Component {
 
 
   render(){
-    console.log("location props", this.props)
-    console.log("location state", this.state)
     return (
       <div style={this.style} key={uuid()}>
       <LocationCarousel name={this.state.name} images={this.state.locimages} key={uuid()}/>
@@ -135,7 +133,7 @@ class Location extends Component {
       <div style={this.tagStyle}>LANDMARKS TO SEE:</div>
       <LandmarkCarousel modalOpen={this.modalOpen} landmarks={this.state.landmarks}/>
       <div style={this.tagStyle}>NEARBY PLACES:</div>
-      {this.props.nearestPlaces && <NearbyPlaces goToLocation={this.props.goToLocation} nearestPlaces={this.props.nearestPlaces}/>}
+      {this.state.nearby_places.nearest_places && <NearbyPlaces goToLocation={this.props.goToLocation} nearestPlaces={this.state.nearby_places.nearest_places}/>}
       <LandmarkModal
         modalData={this.state.modalData}
         onHide={this.modalClose}
