@@ -19,6 +19,7 @@ class Location extends Component {
     id: parseInt(this.props.match.params.id),
     landmarks: [],
     locimages: [],
+    center: {latitude: null, longitude: null},
     tags: [],
     name: null,
     description: null,
@@ -53,7 +54,6 @@ class Location extends Component {
   }
 
   updateWholePage = () => {
-    console.log("in update", this.props.match.params.id)
     fetch(URL+"locations/"+this.props.match.params.id, {
       method: 'GET',
       headers: {
@@ -122,13 +122,14 @@ class Location extends Component {
 
 
   render(){
+    console.log(this.state)
     return (
       <div style={this.style} key={uuid()}>
       <LocationCarousel name={this.state.name} images={this.state.locimages} key={uuid()}/>
       {this.state.description}
       <center style={this.tagStyle}>RECOMMENDED FOR:<br/> <Tags openViewTagsModal={this.openViewTagsModal} openNewTagModal={this.openNewTagModal} tags={this.state.tags} key={uuid()}/></center><br/>
-      <div style={this.tagStyle}>YOU ARE HERE:</div>
-      {this.props.latitude && (<GoogleMapsRender lat={this.props.latitude} long={this.props.longitude} />)}
+      <div style={this.tagStyle}>Location:</div>
+      {this.state.center.latitude && this.state && (<GoogleMapsRender name={this.state.name} userLat={this.props.latitude} userLong={this.props.longitude} lat={this.state.center.latitude} long={this.state.center.longitude} />)}
       <br />
       <div style={this.tagStyle}>LANDMARKS TO SEE:</div>
       <LandmarkCarousel modalOpen={this.modalOpen} landmarks={this.state.landmarks}/>

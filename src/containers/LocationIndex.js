@@ -51,8 +51,7 @@ class LocationIndex extends Component {
 
 
   render(){
-    console.log(this.props)
-    console.log("Do we have a current location", this.doWeHaveACurrentLocation())
+    console.log(this.state)
     if (this.state.locations.length > 0){
       return (
         <div>

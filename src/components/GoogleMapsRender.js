@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 
 
-const AnyReactComponent = (props) => <div>X</div>;
+const LocationCenter = (props) => <div>{props.name}</div>;
+const YouLocation = (props) => <div>You</div>;
+
+
 
 class GoogleMap extends Component {
   state = {
@@ -31,11 +34,17 @@ class GoogleMap extends Component {
           center={this.state.center}
           defaultZoom={this.state.zoom}
         >
-          <AnyReactComponent
+          <LocationCenter name={this.props.name}
             lat={this.props.lat}
             lng={this.props.long}
             // picture={this.props.picture}
-            text="X"
+            text={this.props.name}
+          />
+          <YouLocation
+            lat={this.props.userLat}
+            lng={this.props.userLong}
+            // picture={this.props.picture}
+            text="You"
           />
         </GoogleMapReact>
       </div></center>

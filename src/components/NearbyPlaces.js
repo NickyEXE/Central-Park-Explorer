@@ -1,16 +1,24 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button'
-
+import Card from 'react-bootstrap/Card'
+import CardDeck from 'react-bootstrap/CardDeck'
 
 import { Link } from 'react-router-dom';
 const uuid = require('uuidv4');
 
 const NearbyPlaces = (props) => {
-  return(
-    <div>
-  {props.nearestPlaces.map(place => <p key={uuid()}><Button key={uuid()} onClick={()=> props.goToLocation(place.id)}>{place.name}</Button></p>)}
-    </div>
-  )
+  if(props.nearestPlaces.length> 0) {
+    return(
+    <CardDeck style={{display: 'flex', flexWrap: 'wrap'}}>
+        {props.nearestPlaces.slice(0,3).map(place =>
+          <Card key={uuid()} className="bg-dark text-white" onClick={()=> props.goToLocation(place.id)}>
+            <Card.Img src={place.image} alt={place.alt} />
+            <Card.ImgOverlay>
+              <Card.Text>{place.name}</Card.Text>
+            </Card.ImgOverlay>
+        </Card>)}
+    </CardDeck>
+  )}
 }
 
 export default NearbyPlaces
