@@ -128,7 +128,7 @@ class Location extends Component {
       <LocationCarousel name={this.state.name} images={this.state.locimages} key={uuid()}/>
       {this.state.description}
       <center style={this.tagStyle}>RECOMMENDED FOR:<br/> <Tags openViewTagsModal={this.openViewTagsModal} openNewTagModal={this.openNewTagModal} tags={this.state.tags} key={uuid()}/></center><br/>
-      <div style={this.tagStyle}>Location:</div>
+      <div style={this.tagStyle}>LOCATION:</div>
       {this.state.center.latitude && this.state && (<GoogleMapsRender name={this.state.name} userLat={this.props.latitude} userLong={this.props.longitude} lat={this.state.center.latitude} long={this.state.center.longitude} />)}
       <br />
       <div style={this.tagStyle}>LANDMARKS TO SEE:</div>

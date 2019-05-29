@@ -160,7 +160,7 @@ class App extends Component {
 
 
   interpretGoToMyLocationResponse = (response) => {
-    if (this.state.currentLocation !== "Outside Park"){
+    if ((this.state.currentLocation !== "Outside Park") && this.state.currentLocation){
       this.goToLocation(this.state.currentLocation.id)
     }
     else if (this.state.currentLocation === "Outside Park"){
@@ -182,7 +182,6 @@ class App extends Component {
   }
 
   render(){
-    console.log("the state of app", this.state)
     return (
       <div style={this.background}>
         <div style ={this.style}>

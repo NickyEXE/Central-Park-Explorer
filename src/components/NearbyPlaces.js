@@ -14,7 +14,7 @@ const NearbyPlaces = (props) => {
           <Card key={uuid()} className="bg-dark text-white" onClick={()=> props.goToLocation(place.id)}>
             <Card.Img src={place.image} alt={place.alt} />
             <Card.ImgOverlay>
-              <Card.Text>{place.name}</Card.Text>
+              <strong><Card.Title>{place.name}</Card.Title></strong>
             </Card.ImgOverlay>
         </Card>)}
     </CardDeck>

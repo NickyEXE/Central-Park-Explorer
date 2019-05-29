@@ -11,7 +11,7 @@ class NewTagModal extends Component {
   }
 
   onTagSelect = (e) => {
-    const tag = this.props.modalData.find(tag => tag.id === e.target.value)
+    const tag = this.props.modalData.find(tag => tag.id === parseInt(e.target.value))
     this.setState({selectedTag: tag, userReview: tag.user_review})
   }
 

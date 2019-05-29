@@ -1,18 +1,24 @@
 import React, { Component } from 'react'
 import LocationCard from '../components/LocationCard.js'
 import Spinner from 'react-bootstrap/Spinner'
+import Button from 'react-bootstrap/Button'
 
 const URL = "https://eac02862.ngrok.io/"
 
 class LocationIndex extends Component {
 
   state = {
-    locations: []
+    locations: [],
+    sortByRecommended: false
   }
 
   uuid = require('uuidv4');
 
   componentDidMount(){
+    this.seeAllPlaces()
+  }
+
+  seeAllPlaces = () => {
     fetch(URL+"locations/", {
       method: 'GET',
       headers: {
@@ -21,6 +27,10 @@ class LocationIndex extends Component {
     })
     .then(response => response.json())
     .then(response => this.setState({locations: response}))
+  }
+
+  recommendPlaces = () => {
+    this.recommendedLocations()
   }
 
   locationCardOnClick = (id) => {
@@ -32,7 +42,7 @@ class LocationIndex extends Component {
   }
 
   sortLocations = () => {
-    if (this.props.nearestPlaces){
+    if (this.props.nearestPlaces && !this.state.sortByRecommended){
     const nearestPlaceIds = this.props.nearestPlaces.map(place => place.id)
     const nearestPlaces = this.state.locations.filter(location => nearestPlaceIds.includes(location.id))
     const currentLocation = this.doWeHaveACurrentLocation() ? this.state.locations.filter(location => location.id === this.props.currentLocation.id) : null
@@ -45,16 +55,16 @@ class LocationIndex extends Component {
     }
   }
 
-  allNearLocations = () => {
-    console.log("wip")
+  recommendedLocations = () => {
+    this.setState({sortByRecommended: true})
   }
 
-
   render(){
-    console.log(this.state)
     if (this.state.locations.length > 0){
+      if (!this.state.sortByRecommended){
       return (
         <div>
+        <Button variant="secondary" onClick={this.recommendPlaces}>Recommend me some places</Button>
         {this.doWeHaveACurrentLocation() && <div><h3>Current location:</h3>{this.sortLocations().currentLocation.map(
           location => <LocationCard key={this.uuid()} {...location} locationCardOnClick={this.locationCardOnClick}/>)}</div> }
         <h3>Nearest locations:</h3>
@@ -62,7 +72,12 @@ class LocationIndex extends Component {
         <h3>All other locations:</h3>
         {this.sortLocations().unusedLocations.map(location => <LocationCard key={this.uuid()} {...location} locationCardOnClick={this.locationCardOnClick}/>)}
         </div>
-      )
+      )}
+      else{
+        return (<div>
+          <Button variant="secondary" onClick={() => this.setState({sortByRecommended: false})} >Show me the places nearest me.</Button>
+          {this.state.locations.sort((location1, location2) => location2.interests.length - location1.interests.length).map(location => <LocationCard key={this.uuid()} {...location} locationCardOnClick={this.locationCardOnClick}/>)}</div>)
+      }
     }
     else{
       return (
