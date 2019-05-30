@@ -131,6 +131,11 @@ class Location extends Component {
       <div style={this.tagStyle}>LOCATION:</div>
       {this.state.center.latitude && this.state && (<GoogleMapsRender name={this.state.name} userLat={this.props.latitude} userLong={this.props.longitude} lat={this.state.center.latitude} long={this.state.center.longitude} />)}
       <br />
+      {this.state.facts.length > 0 && <div>
+      <div style={this.tagStyle}>FUN FACT:</div>
+      {this.state.facts[0].factoid}</div>}
+
+      <br />
       <div style={this.tagStyle}>LANDMARKS TO SEE:</div>
       <LandmarkCarousel modalOpen={this.modalOpen} landmarks={this.state.landmarks}/>
       <div style={this.tagStyle}>NEARBY PLACES:</div>
