@@ -16,6 +16,7 @@ class Login extends Component {
 
   onSubmit = (e) => {
     e.preventDefault()
+    console.log("Submitting with this state for login", this.state)
     fetch(URL+"login",{
       method: 'POST', // or 'PUT'
       body: JSON.stringify(this.state), // data can be `string` or {object}!
@@ -31,8 +32,7 @@ class Login extends Component {
       else
       {
         this.props.setCurrentUser(res)
-        this.props.history.goBack()}
-
+        this.props.history.push("/locations")}
       }
     )
   }

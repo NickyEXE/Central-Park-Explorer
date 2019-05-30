@@ -16,6 +16,7 @@ class CreateUser extends Component {
 
   onSubmit = (e) => {
     console.log("signing up")
+    if (this.state.username && this.state.password){
     e.preventDefault()
     fetch(URL+"users/create",{
       method: 'POST', // or 'PUT'
@@ -26,8 +27,13 @@ class CreateUser extends Component {
     })
     .then(res => res.json())
     .then(res => {
+    if (res.error){
+      alert(res.error)
+    }
+    else {
     this.props.setCurrentUser(res)
-    this.props.history.push('/interests')})
+    this.props.history.push('/interests')}})}
+    else {alert("Please enter a username and a password!")}
   }
 
   onLogin = () => {

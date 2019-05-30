@@ -10,9 +10,9 @@ const Navigator = (props) =>  {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
           {props.currentuser ? <Nav.Link onClick={props.logout}>Logout</Nav.Link> : <Nav.Link href="/login">Login</Nav.Link>}
-          <Nav.Link onClick={props.goToIndex}>View All Locations</Nav.Link>
+          {props.currentuser && <div><Nav.Link onClick={props.goToIndex}>View All Locations</Nav.Link>
           <Nav.Link onClick={props.goToProfile}>View Your Profile</Nav.Link>
-          <Nav.Link onClick={props.goToMyLocation}>Where am I now?</Nav.Link>
+          <Nav.Link onClick={props.goToMyLocation}>Where am I now?</Nav.Link></div>}
         </Nav>
       </Navbar.Collapse>
     </Navbar>
